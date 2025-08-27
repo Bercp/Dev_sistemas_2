@@ -27,7 +27,7 @@ export default function AttendeesScreen() {
 
   
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState(''); // normalizada + debounced
+  const [query, setQuery] = useState(''); 
 
   
   const [undoId, setUndoId] = useState<string | null>(null);
@@ -36,7 +36,7 @@ export default function AttendeesScreen() {
   
   const reqIdRef = useRef(0);
 
-  // ---- Carregamento com query explícita ----
+  
   const load = async (p = 1, append = false, q = query) => {
     const myId = ++reqIdRef.current;
     try {
@@ -74,7 +74,7 @@ export default function AttendeesScreen() {
   useEffect(() => {
     setPage(1);
     load(1, false, query);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [query, eventId]);
 
   const onChangeSearch = (t: string) => setSearch(t);
