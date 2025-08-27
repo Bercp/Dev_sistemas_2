@@ -25,15 +25,15 @@ export default function AttendeesScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
-  // Busca (texto bruto digitado) + query normalizada e DEBOUNCED
+  
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState(''); // normalizada + debounced
 
-  // “Desfazer” (só front)
+  
   const [undoId, setUndoId] = useState<string | null>(null);
   const undoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Evita respostas “fora de ordem”
+  
   const reqIdRef = useRef(0);
 
   // ---- Carregamento com query explícita ----
@@ -57,20 +57,20 @@ export default function AttendeesScreen() {
     }
   };
 
-  // 1ª carga
+  
   useEffect(() => {
     load(1, false, '');
     return () => { if (undoTimerRef.current) clearTimeout(undoTimerRef.current); };
   }, [eventId]);
 
-  // Debounce da busca: quando o usuário digita, esperamos 300ms,
-  // normalizamos e atualizamos `query`. Isso TRIGGERA o load abaixo.
+  
+  
   useEffect(() => {
     const h = setTimeout(() => setQuery(normalize(search)), 300);
     return () => clearTimeout(h);
   }, [search]);
 
-  // Quando `query` muda (já debounced), recarrega página 1 com a query correta
+  
   useEffect(() => {
     setPage(1);
     load(1, false, query);
